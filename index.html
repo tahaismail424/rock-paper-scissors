@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            rock paper scissors
+        </title>
+    </head>
+    <body>
+        <script>
+            //computer selection
+            function computerPlay() {
+                i = Math.floor(Math.random() * 3);
+                play = ["rock", "paper", "scissors"];
+                return play[i];
+            }
+            //plays game
+            function playRound(playerSelection, computerSelection) {
+
+            
+                player = playerSelection.toLowerCase();
+                //if draw
+                if (player === computerSelection) {
+                    console.log(`Draw! You both picked ${player}`)
+                }
+                //if player win
+                else if (player === "rock" && computerSelection === "scissors" ||
+                player === "paper" && computerSelection === "rock" ||
+                player === "scissors" && computerSelection === "paper") {
+                    console.log(`You win! ${player} beats ${computerSelection}.`)
+                }
+                //if player lose
+                else if (player === "scissors" && computerSelection === "rock" ||
+                player === "rock" && computerSelection === "paper" ||
+                player === "paper" && computerSelection === "scissors") {
+                    console.log(`You lose! ${computerSelection} beats ${player}.`)
+                }
+                //if player entered something they weren't supposed to
+                else {
+                    console.log("Game cannot be played. Please enter either 'rock', 'paper', or 'scissors'.")
+                }
+            }
+            
+            //whenever I put this in a function or a loop it just loops infinitely and i have no idea why .___________.
+            playRound(prompt("Rock, Paper, or Scissors?"), computerPlay());
+            playRound(prompt("Rock, Paper, or Scissors?"), computerPlay());
+            playRound(prompt("Rock, Paper, or Scissors?"), computerPlay());
+            playRound(prompt("Rock, Paper, or Scissors?"), computerPlay());
+            playRound(prompt("Rock, Paper, or Scissors?"), computerPlay());
+            
+           
+
+        </script>
+    </body>
+</html>
