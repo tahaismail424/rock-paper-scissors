@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            rock paper scissors
+        </title>
+    </head>
+    <body>
+        <div class="btn-group">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+        <div>Win Log:
+            <div id="WinLog"></div>
+        </div>
+        <script>
+
+            const winLog = document.querySelector("#WinLog")
+            let pScore = 0;
+            let cScore = 0;
+            //computer selection
+            computerPlay = function () {
+                i = Math.floor(Math.random() * 3);
+                play = ["rock", "paper", "scissors"];
+                return play[i];
+            }
+
+            function addToLog(text) {
+                const linebreak = document.createElement("br");
+                winLog.insertBefore(linebreak, winLog.childNodes[0]);
+                winLog.insertBefore(document.createTextNode(text), winLog.childNodes[0]);
+            }
+
+            function victory() {
+                while (winLog.firstChild) {
+                    winLog.removeChild(winLog.lastChild)
+                }
+                if (cScore >= 5) {
+                    alert("Computer wins!");
+                }
+                else {
+                    alert("You win!");
+                }
+                pScore = cScore = 0;
+            }
+           
+
+                
+
+            function playRound(playerSelection) {
+
+            
+                player = playerSelection.toLowerCase();
+                c = computerPlay();
+                if (player === c) {
+                    addToLog(`Draw! You both picked ${player}`);
+                }
+                //if player win
+                else if (player === "rock" && c === "scissors" ||
+                player === "paper" && c === "rock" ||
+                player === "scissors" && c === "paper") {
+                    addToLog(`You win! ${player} beats ${c}.`);
+                    pScore++;
+                }
+                //if player lose
+                else if (player === "scissors" && c === "rock" ||
+                player === "rock" && c === "paper" ||
+                player === "paper" && c === "scissors") {
+                    addToLog(`You lose! ${c} beats ${player}.`);
+                    cScore++;
+                }
+                //if player entered something they weren't supposed to
+                else {
+                    addToLog("Game cannot be played. Please enter either 'rock', 'paper', or 'scissors'.");
+                }
+                if (pScore >= 5 || cScore >=5) {
+                    victory();
+                }
+            }
+
+            const buttons = Array.from(document.querySelectorAll('.btn-group > button'));
+            
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    playRound(button.id);
+                });
+            });
+
+
+        </script>
+    </body>
+</html>
